@@ -105,6 +105,18 @@ export const Notebooksbilliger: Store = {
       url: 'https://www.notebooksbilliger.de/zotac+gaming+geforce+rtx+3060+twin+edge+oc+12gb+grafikkarte+700378',
     },
     {
+      brand: 'nvidia',
+      model: 'founders edition',
+      series: '3060ti',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3060+ti+founders+edition+rtg+725379',
+    },
+    {
+      brand: 'nvidia',
+      model: 'founders edition',
+      series: '3070',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3070+founders+edition+ceb+725377',
+    },
+    {
       brand: 'inno3d',
       model: 'ichill x3',
       series: '3070',
@@ -165,6 +177,18 @@ export const Notebooksbilliger: Store = {
       url: 'https://www.notebooksbilliger.de/zotac+gaming+geforce+rtx+3070+twin+edge+oc+8gb+gddr6+grafikkarte+684216',
     },
     {
+      brand: 'nvidia',
+      model: 'founders edition',
+      series: '3070ti',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3070+ti+founders+edition+jiu+725375',
+    },
+    {
+      brand: 'nvidia',
+      model: 'founders edition',
+      series: '3080',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3080+founders+edition+690362?nbb=pn.&nbbct=1002_10#Q0C10',
+    },
+    {
       brand: 'gainward',
       model: 'phoenix gs',
       series: '3080',
@@ -223,6 +247,18 @@ export const Notebooksbilliger: Store = {
       model: 'xlr8 revel',
       series: '3080',
       url: 'https://www.notebooksbilliger.de/pny+geforce+rtx+3080+10gb+xlr8+gaming+revel+epic+x+grafikkarte+677412',
+    },
+    {
+      brand: 'nvidia',
+      model: 'founders edition',
+      series: '3080ti',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3080+ti+founders+edition+rst+725372',
+    },
+    {
+      brand: 'nvidia',
+      model: 'founders edition',
+      series: '3090',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3090+founders+edition+683300?nbb=pn.&nbbct=1002_10#Q0C10',
     },
     {
       brand: 'asus',
