@@ -36,13 +36,18 @@ export const Notebooksbilliger: Store = {
         text: ['leider ist dieser artikel nicht mehr verfügbar.'],
       },
     ],
+    cookie: {
+      container: '#uc-banner-modal',
+      text: ['nur notwendige cookies verwenden'],
+    },
   },
   links: [
     {
       brand: 'test:brand',
       model: 'test:model',
       series: 'test:series',
-      url: 'https://www.notebooksbilliger.de/gainward+geforce+rtx+2070+super+phoenix+v1+grafikkarte+656238',
+      // url: 'https://www.notebooksbilliger.de/pc+hardware/grafikkarten/nvidia/asus+tuf+gaming+geforce+gtx+1660+ti+top+evo+737355',
+      url: 'https://www.notebooksbilliger.de/zubehoer/kabel+adapter+zubehoer/patchkabel/goobay+05m+rj45+patchkabel+cat+6a+sftp+pimf+500+mhz+286774',
     },
     {
       brand: 'asus',
@@ -108,13 +113,13 @@ export const Notebooksbilliger: Store = {
       brand: 'nvidia',
       model: 'founders edition',
       series: '3060ti',
-      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3060+ti+founders+edition+rtg+725379',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3060+ti+founders+edition+719485',
     },
     {
       brand: 'nvidia',
       model: 'founders edition',
       series: '3070',
-      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3070+founders+edition+ceb+725377',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3070+founders+edition+714793',
     },
     {
       brand: 'inno3d',
@@ -186,7 +191,7 @@ export const Notebooksbilliger: Store = {
       brand: 'nvidia',
       model: 'founders edition',
       series: '3080',
-      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3080+founders+edition+690362?nbb=pn.&nbbct=1002_10#Q0C10',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3080+founders+edition+700586',
     },
     {
       brand: 'gainward',
@@ -252,13 +257,13 @@ export const Notebooksbilliger: Store = {
       brand: 'nvidia',
       model: 'founders edition',
       series: '3080ti',
-      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3080+ti+founders+edition+rst+725372',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3080+ti+founders+edition+fe+720777',
     },
     {
       brand: 'nvidia',
       model: 'founders edition',
       series: '3090',
-      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3090+founders+edition+683300?nbb=pn.&nbbct=1002_10#Q0C10',
+      url: 'https://www.notebooksbilliger.de/nvidia+geforce+rtx+3090+founders+edition+asd+722486',
     },
     {
       brand: 'asus',
@@ -316,4 +321,6 @@ export const Notebooksbilliger: Store = {
     },
   ],
   name: 'notebooksbilliger',
+  autoPurchase: true,
+  hasCookieWall: true,
 };

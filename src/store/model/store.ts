@@ -258,6 +258,7 @@ export type Labels = {
   inStock?: LabelQuery;
   outOfStock?: LabelQuery;
   maxPrice?: Pricing;
+  cookie?: LabelQuery;
 };
 
 export type CaptchaDeterrent = {
@@ -303,4 +304,6 @@ export type Store = {
   proxyList?: string[];
   currentProxyIndex?: number;
   captchaDeterrent?: CaptchaDeterrent;
+  autoPurchase?: boolean;
+  hasCookieWall?: boolean;
 };

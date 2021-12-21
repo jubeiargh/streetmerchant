@@ -402,6 +402,7 @@ if (process.env.MAX_PRICE) {
 }
 
 const store = {
+  autoPurchase: envOrBoolean(process.env.AUTO_PURCHASE, false),
   autoAddToCart: envOrBoolean(process.env.AUTO_ADD_TO_CART, true),
   country: envOrString(process.env.COUNTRY, 'usa'),
   maxPrice: {
@@ -490,6 +491,12 @@ const store = {
 
 const restartTime = envOrNumber(process.env.RESTART_TIME, 0);
 
+const purchase = {
+  email: envOrString(process.env.PURCHASE_EMAIL),
+  password: envOrString(process.env.PURCHASE_PASSWORD),
+  testRun: envOrBoolean(process.env.AUTO_PURCHASE_TEST_RUN, true),
+};
+
 export const defaultStoreData = {
   maxPageSleep: browser.maxSleep,
   minPageSleep: browser.minSleep,
@@ -506,6 +513,7 @@ export const config = {
   proxy,
   store,
   restartTime,
+  purchase,
 };
 
 export function setConfig(newConfig: any) {

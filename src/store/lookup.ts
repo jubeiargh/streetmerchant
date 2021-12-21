@@ -28,6 +28,8 @@ import {handleCaptchaAsync} from './captcha-handler';
 import useProxy from '@doridian/puppeteer-page-proxy';
 import {promises as fs} from 'fs';
 import path from 'path';
+import {createCursor} from 'ghost-cursor';
+import {addToCartAndCheckout} from '../checkout';
 
 const inStock: Record<string, boolean> = {};
 
@@ -83,7 +85,7 @@ async function handleProxy(request: HTTPRequest, proxy?: string) {
 
   try {
     await useProxy(request, proxy);
-  } catch (error: unknown) {
+  } catch (error) {
     logger.error('handleProxy', error);
     try {
       await request.abort();
@@ -168,7 +170,7 @@ async function lookup(browser: Browser, store: Store) {
       try {
         await fetchLinks(store, browser);
         linkBuilderLastRunTimes[store.name] = Date.now();
-      } catch (error: unknown) {
+      } catch (error) {
         logger.error(error);
       }
     }
@@ -257,7 +259,7 @@ async function lookup(browser: Browser, store: Store) {
 
     try {
       statusCode = await lookupIem(browser, store, page, link);
-    } catch (error: unknown) {
+    } catch (error) {
       if (store.currentProxyIndex !== undefined && store.proxyList) {
         const proxy = `${store.currentProxyIndex + 1}/${
           store.proxyList.length
@@ -295,10 +297,10 @@ async function lookup(browser: Browser, store: Store) {
     // used to detect bot traffic, it introduces a 5 second page delay
     // before redirecting to the next page
     await processBackoffDelay(store, link, statusCode);
-    await closePage(page);
-    if (customContext) {
-      await context.close();
-    }
+    // await closePage(page);
+    // if (customContext) {
+    //   await context.close();
+    // }
   }
   /* eslint-enable no-await-in-loop */
 }
@@ -330,6 +332,10 @@ async function lookupIem(
       await (link.openCartAction === undefined
         ? open(givenUrl)
         : link.openCartAction(browser));
+    }
+
+    if (config.store.autoPurchase && store.autoPurchase) {
+      addToCartAndCheckout(browser, link, store, page);
     }
 
     sendNotification(link, store);
@@ -552,7 +558,7 @@ async function runCaptchaDeterrent(browser: Browser, store: Store, page: Page) {
       setTimeout(() => {
         // Do nothing
       }, 3000);
-    } catch (error: unknown) {
+    } catch (error) {
       logger.error(error);
     }
 
@@ -564,6 +570,8 @@ async function runCaptchaDeterrent(browser: Browser, store: Store, page: Page) {
   }
 }
 
+
+
 export async function tryLookupAndLoop(browser: Browser, store: Store) {
   if (!browser.isConnected()) {
     logger.silly(`[${store.name}] Ending this loop as browser is disposed...`);
@@ -573,11 +581,12 @@ export async function tryLookupAndLoop(browser: Browser, store: Store) {
   logger.silly(`[${store.name}] Starting lookup...`);
   try {
     await lookup(browser, store);
-  } catch (error: unknown) {
+  } catch (error) {
     logger.error(error);
   }
 
   const sleepTime = getSleepTime(store);
   logger.silly(`[${store.name}] Lookup done, next one in ${sleepTime} ms`);
-  setTimeout(tryLookupAndLoop, sleepTime, browser, store);
+  /** loop disabled */
+  // setTimeout(tryLookupAndLoop, sleepTime, browser, store);
 }

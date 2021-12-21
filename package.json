@@ -43,6 +43,7 @@
     "cheerio": "^1.0.0-rc.10",
     "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
+    "ghost-cursor": "^1.1.7",
     "messaging-api-telegram": "^1.0.4",
     "mqtt": "^4.2.8",
     "node-fetch": "^2.6.1",
