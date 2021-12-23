@@ -26,7 +26,28 @@ export function sendTelegramMessage(link: Link, store: Store) {
             )
           );
           logger.info('✔ telegram message sent');
-        } catch (error: unknown) {
+        } catch (error) {
+          logger.error("✖ couldn't send telegram message", error);
+        }
+      }
+
+      await Promise.all(results);
+    })();
+  }
+}
+
+export function sendCustomTelegramMessage(message: string) {
+  if (telegram.accessToken && telegram.chatId) {
+    logger.debug('↗ sending telegram message');
+
+    (async () => {
+      const results = [];
+
+      for (const chatId of telegram.chatId) {
+        try {
+          results.push(client.sendMessage(chatId, `${message}`));
+          logger.info('✔ telegram message sent');
+        } catch (error) {
           logger.error("✖ couldn't send telegram message", error);
         }
       }

@@ -65,7 +65,7 @@ async function loopMain() {
   try {
     restartMain();
     await main();
-  } catch (error: unknown) {
+  } catch (error) {
     logger.error(
       '✖ something bad happened, resetting streetmerchant in 5 seconds',
       error
@@ -77,6 +77,7 @@ async function loopMain() {
 export async function launchBrowser(): Promise<Browser> {
   const args: string[] = [];
 
+  args.push('--lang=de-DE,de');
   // Skip Chromium Linux Sandbox
   // https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#setting-up-chrome-linux-sandbox
   if (config.browser.isTrusted) {
@@ -107,6 +108,7 @@ export async function launchBrowser(): Promise<Browser> {
   }
 
   await stop();
+  // puppeteer.use(StealthPlugin());
   const browser = await launch({
     args,
     defaultViewport: {

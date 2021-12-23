@@ -28,7 +28,7 @@ export async function handleCaptchaAsync(
   let captchaPayload: CaptchaPayload | undefined = undefined;
   try {
     captchaPayload = await getCaptchaPayloadAsync(page, store);
-  } catch (error: unknown) {
+  } catch (error) {
     logger.error('unable to get captcha challenge', error);
     processingFailed = true;
   }
@@ -88,7 +88,9 @@ async function getCaptchaPayloadAsync(
       break;
     case 'link':
       captchaPayload = {
-        content: await challengeElement?.evaluate(img => img.src),
+        content: (await challengeElement?.evaluate(img =>
+          img.getAttribute('src')
+        )) as string,
         type: 'text',
       };
       break;
