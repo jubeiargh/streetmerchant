@@ -308,10 +308,10 @@ async function lookup(browser: Browser, store: Store) {
     // used to detect bot traffic, it introduces a 5 second page delay
     // before redirecting to the next page
     await processBackoffDelay(store, link, statusCode);
-    await closePage(page);
-    if (customContext) {
-      await context.close();
-    }
+    // await closePage(page);
+    // if (customContext) {
+    //   await context.close();
+    // }
   }
   /* eslint-enable no-await-in-loop */
 }
@@ -597,5 +597,5 @@ export async function tryLookupAndLoop(browser: Browser, store: Store) {
   const sleepTime = getSleepTime(store);
   logger.silly(`[${store.name}] Lookup done, next one in ${sleepTime} ms`);
   /** loop disabled */
-  setTimeout(tryLookupAndLoop, sleepTime, browser, store);
+  // setTimeout(tryLookupAndLoop, sleepTime, browser, store);
 }

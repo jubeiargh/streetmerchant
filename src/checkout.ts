@@ -9,6 +9,8 @@ import {promises as fs} from 'fs';
 import path from 'path';
 import {pageIncludesLabels} from './store/includes-labels';
 import {sendCustomTelegramMessage} from './messaging/telegram';
+import {NotebooksbilligerStateMachine} from './state-machine/notebooksbilliger/notebooksbillger.state-machine';
+import {StateMachine} from './state-machine/state-machine';
 
 const checkoutStatus = {
   maxPrice: 1600,
@@ -35,18 +37,30 @@ export async function addToCartAndCheckout(
 
   const cursor = createCursor(page);
 
+  let stateMachine: StateMachine | undefined = undefined;
   try {
     switch (store.name) {
       case NvidiaDE.name:
         await checkoutNvidiaDe(store, page, link, cursor);
         break;
       case Notebooksbilliger.name:
-        await checkoutNotebooksbilliger(store, page, link, cursor);
+        // await checkoutNotebooksbilliger(store, page, link, cursor);
+        stateMachine = new NotebooksbilligerStateMachine({
+          page,
+          store,
+          link,
+          cursor,
+        });
+
         break;
       default:
         logger.info('no checkout function found');
     }
+
+    await stateMachine?.initialize();
+    await stateMachine?.doCheckout();
   } catch (exp) {
+    console.log(exp);
     logger.error(exp);
     logger.error(page.url());
   }
