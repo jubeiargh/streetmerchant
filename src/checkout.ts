@@ -77,7 +77,16 @@ async function checkoutNvidiaDe(
   await page.waitForSelector(buySelector);
   await cursor.click(buySelector);
 
-  await checkoutNotebooksbilliger(store, page, link, cursor);
+  // await checkoutNotebooksbilliger(store, page, link, cursor);
+
+  const stateMachine = new NotebooksbilligerStateMachine({
+    page,
+    store,
+    link,
+    cursor,
+  });
+  await stateMachine?.initialize();
+  await stateMachine?.doCheckout();
 }
 
 async function checkoutNotebooksbilliger(
