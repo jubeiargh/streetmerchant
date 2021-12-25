@@ -73,7 +73,7 @@ export abstract class StateMachine {
 
   async onPurchaseComplete() {
     logger.info(
-      `Purchase comple: ${this.link.brand} ${this.link.series} for ${this.link.price}`
+      `Purchase complete: ${this.link.brand} ${this.link.series} for ${this.link.price}`
     );
     await this.callback?.onPurchaseComplete(this.link);
   }
