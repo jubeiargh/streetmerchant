@@ -22,29 +22,29 @@ export async function addToCartAndCheckout(
   link: Link,
   store: Store,
   page: Page
-) {
-  if (!config.store.autoPurchase) return;
+): Promise<boolean> {
+  if (!config.store.autoPurchase) return false;
 
   if (link.price && link.price > checkoutStatus.maxPrice) {
     logger.info('Buying cancelled due to max price cap');
-    return;
+    return false;
   }
 
   if (checkoutStatus.amount <= 0) {
     logger.info('Buying cancelled du to amount cap');
-    return;
+    return false;
   }
 
   const cursor = createCursor(page);
 
   let stateMachine: StateMachine | undefined = undefined;
+
   try {
     switch (store.name) {
       case NvidiaDE.name:
         await checkoutNvidiaDe(store, page, link, cursor);
         break;
       case Notebooksbilliger.name:
-        // await checkoutNotebooksbilliger(store, page, link, cursor);
         stateMachine = new NotebooksbilligerStateMachine({
           page,
           store,
@@ -53,17 +53,18 @@ export async function addToCartAndCheckout(
         });
 
         break;
-      default:
-        logger.info('no checkout function found');
     }
 
-    await stateMachine?.initialize();
-    await stateMachine?.doCheckout();
+    if (!stateMachine) return false;
+
+    await stateMachine.initialize();
+    return await stateMachine.doCheckout();
   } catch (exp) {
     console.log(exp);
     logger.error(exp);
     logger.error(page.url());
   }
+  return false;
 }
 async function checkoutNvidiaDe(
   store: Store,
