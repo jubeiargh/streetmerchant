@@ -3,7 +3,7 @@ import {Page} from 'puppeteer';
 import {logger} from '../logger';
 import {Link, Store} from '../store/model';
 import {State} from './state';
-import {asyncMaxPrioritized} from './util';
+import {asyncMaxPrioritized, screenshot} from './util';
 
 export interface PurchaseCallback {
   onPurchaseComplete: (link: Link) => Promise<void>;
@@ -65,7 +65,13 @@ export abstract class StateMachine {
 
     if (currentState === undefined) {
       logger.info('Stopping since no current state matching');
+      await screenshot(this.link, this.page, true);
       return false;
+    }
+
+    if (!this.success) {
+      logger.info('Purchase not successful');
+      await screenshot(this.link, this.page, true);
     }
 
     return this.success;
