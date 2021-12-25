@@ -1,14 +1,10 @@
-import {createCursor, GhostCursor} from 'ghost-cursor';
+import {createCursor} from 'ghost-cursor';
 import {Browser, Page} from 'puppeteer';
 import {logger} from './logger';
 import {Link, Store} from './store/model';
 import {config} from './config';
 import {NvidiaDE} from './store/model/nvidia-de';
 import {Notebooksbilliger} from './store/model/notebooksbilliger';
-import {promises as fs} from 'fs';
-import path from 'path';
-import {pageIncludesLabels} from './store/includes-labels';
-import {sendCustomTelegramMessage} from './messaging/telegram';
 import {NotebooksbilligerStateMachine} from './state-machine/notebooksbilliger/notebooksbillger.state-machine';
 import {StateMachine} from './state-machine/state-machine';
 import {NvidiaDeStateMachine} from './state-machine/nvidia-de/nvidia-de.state-machine';
