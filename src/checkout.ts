@@ -10,7 +10,7 @@ import {StateMachine} from './state-machine/state-machine';
 import {NvidiaDeStateMachine} from './state-machine/nvidia-de/nvidia-de.state-machine';
 
 const checkoutStatus = {
-  maxPrice: 1600,
+  maxPrice: 2000,
   amount: 2,
 };
 
