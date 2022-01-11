@@ -11,7 +11,7 @@ export class ProductPage extends State {
   }
 
   async doTransition(): Promise<boolean> {
-    const buySelector = 'div.buy a.featured-buy-link';
+    const buySelector = 'div.buy .buy-link';
     await this.page().waitForSelector(buySelector);
     await this.clickNavigate(buySelector);
     return true;
